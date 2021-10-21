@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verademo-core", "verademo-core\verademo-core.csproj", "{A8B13E80-6C0A-4629-AAFE-910797E0FD4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verademo-core-test", "verademo-core-test\verademo-core-test.csproj", "{21B7405F-4A6A-45CC-A8BB-EA773698951E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8B13E80-6C0A-4629-AAFE-910797E0FD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B13E80-6C0A-4629-AAFE-910797E0FD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B13E80-6C0A-4629-AAFE-910797E0FD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B13E80-6C0A-4629-AAFE-910797E0FD4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21B7405F-4A6A-45CC-A8BB-EA773698951E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21B7405F-4A6A-45CC-A8BB-EA773698951E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21B7405F-4A6A-45CC-A8BB-EA773698951E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21B7405F-4A6A-45CC-A8BB-EA773698951E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7718C9B1-98D4-4B6C-96BA-3E9AF351F581}
+	EndGlobalSection
+EndGlobal
