@@ -6,22 +6,20 @@
 trigger:
 - master
 
-
 stages: 
 - stage: Build
-
-  jobs:
-  - job: Release_Build
-    displayName: Release Build
-
-    pool:
+  pool:
         vmImage: 'windows-latest'
 
-    variables:
+  variables:
         solution: '**/*.sln'
         buildPlatform: 'Any CPU'
         buildConfiguration: 'Release'
 
+  jobs:
+  - job: Release_Build
+    displayName: Release Build
+  
     steps:
     - task: NuGetToolInstaller@1
   
@@ -35,8 +33,17 @@ stages:
            msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
            platform: '$(buildPlatform)'
            configuration: '$(buildConfiguration)'
+        
+# Testing Stage of CI/CD Pipeline
+- stage: Testing
 
-    - task: VSTest@2
+  jobs: 
+  - job: Unit_Testing
+    displayName: Release Build
+      
+    steps: 
+     - bash: echo "Hello world"
+     - task: VSTest@2
       inputs:
            platform: '$(buildPlatform)'
            configuration: '$(buildConfiguration)'
