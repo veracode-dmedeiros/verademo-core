@@ -53,6 +53,6 @@ stages:
     
     steps:
     - bash: echo 'SAST'
-    - bash: $(system.teamProject)
-    - bash: $(build.buildNumber)
-    - bash: $(build.artifactstagingdirectory)
+    - bash: echo $(system.teamProject)
+    - bash: echo $(build.buildNumber)
+    - bash: echo $(build.artifactstagingdirectory)
