@@ -42,7 +42,6 @@ stages:
     displayName: Release Build
       
     steps: 
-     - bash: echo "Hello world"
      - task: VSTest@2
           inputs:
               platform: '$(buildPlatform)'
