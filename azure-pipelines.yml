@@ -36,10 +36,17 @@ stages:
         
 # Testing Stage of CI/CD Pipeline
 - stage: Testing
+  pool:
+        vmImage: 'windows-latest'
+
+  variables:
+        solution: '**/*.sln'
+        buildPlatform: 'Any CPU'
+        buildConfiguration: 'Release'
 
   jobs: 
   - job: Unit_Testing
-    displayName: Release Build
+    displayName: Unit Testing
       
     steps: 
      - task: VSTest@2
