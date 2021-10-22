@@ -47,3 +47,10 @@ stages:
        inputs:
             platform: '$(buildPlatform)'
             configuration: '$(buildConfiguration)'
+           
+  - job: Security_Testing
+    displayName: SAST
+    
+    steps:
+    - bash: echo 'SAST'
+
