@@ -6,16 +6,16 @@
 trigger:
 - master
 
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
 stages: 
 - stage: Build
   pool:
         vmImage: 'windows-latest'
-
-  variables:
-        solution: '**/*.sln'
-        buildPlatform: 'Any CPU'
-        buildConfiguration: 'Release'
-
+        
   jobs:
   - job: Release_Build
     displayName: Release Build
@@ -38,12 +38,6 @@ stages:
 - stage: Testing
   pool:
         vmImage: 'windows-latest'
-
-  variables:
-        solution: '**/*.sln'
-        buildPlatform: 'Any CPU'
-        buildConfiguration: 'Release'
-
   jobs: 
   - job: Unit_Testing
     displayName: Unit Testing
