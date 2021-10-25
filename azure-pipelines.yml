@@ -37,7 +37,7 @@ stages:
 
     - task: PublishPipelineArtifact@1
       inputs:
-            targetPath: $(System.DefaultWorkingDirectory)/bin/WebApp
+            targetPath: D:\a\1\a\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
             artifactName: WebApp
 
     
