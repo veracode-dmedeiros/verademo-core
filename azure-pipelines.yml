@@ -33,11 +33,11 @@ stages:
            msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
            platform: '$(buildPlatform)'
            configuration: '$(buildConfiguration)'
-    
-    - task: PublishBuildArtifacts@1
+
+    - task: PublishPipelineArtifact@1
       inputs:
-            pathToPublish: '$(Build.ArtifactStagingDirectory)'
-            artifactName: release_application
+            targetPath: $(System.DefaultWorkingDirectory)/bin/WebApp
+            artifactName: WebApp
 
     
 # Testing Stage of CI/CD Pipeline
@@ -74,3 +74,12 @@ stages:
         failBuildIfUploadAndScanBuildStepFails: true
         importResults: true
         maximumWaitTime: '360'
+
+ - stage: Deployment
+    
+   jobs:
+   - job: Release_Deployment
+     displayName: Release Deployment
+   
+     steps:
+     - bach: echo 'Release Deployed'
