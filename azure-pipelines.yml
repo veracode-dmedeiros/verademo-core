@@ -84,4 +84,4 @@ stages:
      displayName: Release Deployment
    
      steps:
-     - bach: echo 'Release Deployed'
+     - bash: echo 'Release Deployed'
