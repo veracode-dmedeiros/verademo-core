@@ -6,16 +6,16 @@
 trigger:
 - master
 
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
 stages: 
 - stage: Build
   pool:
         vmImage: 'windows-latest'
-
-  variables:
-        solution: '**/*.sln'
-        buildPlatform: 'Any CPU'
-        buildConfiguration: 'Release'
-
+        
   jobs:
   - job: Release_Build
     displayName: Release Build
@@ -44,30 +44,33 @@ stages:
 - stage: Testing
   pool:
         vmImage: 'windows-latest'
-
-  variables:
-        solution: '**/*.sln'
-        buildPlatform: 'Any CPU'
-        buildConfiguration: 'Release'
-
   jobs: 
   - job: Unit_Testing
     displayName: Unit Testing
       
     steps: 
      - task: VSTest@2
-          inputs:
-              platform: '$(buildPlatform)'
-              configuration: '$(buildConfiguration)'
-
-
- - stage: Deployment
+       inputs:
+            platform: '$(buildPlatform)'
+            configuration: '$(buildConfiguration)'
+           
+  - job: Security_Testing
+    displayName: SAST
     
-   jobs:
-   - job: Release_Deployment
-     displayName: Release Deployment
-   
-     steps:
-     - batch: echo 'Deployed'
-   
-   
+    steps:
+    - bash: echo 'SAST'
+    - bash: echo $(system.teamProject)
+    - bash: echo $(build.buildNumber)
+    - bash: echo $(build.artifactstagingdirectory)
+    - task: Veracode@3
+      inputs:
+        ConnectionDetailsSelection: 'Credentials'
+        apiId: '$(VERACODE_ID)'
+        apiKey: '$(VERACODE_KEY)'
+        veracodeAppProfile: '$(system.teamProject)'
+        version: '$(build.buildNumber)'
+        filepath: '$(build.artifactstagingdirectory)'
+        sandboxName: 'Development Sandbox'
+        failBuildIfUploadAndScanBuildStepFails: true
+        importResults: true
+        maximumWaitTime: '360'
