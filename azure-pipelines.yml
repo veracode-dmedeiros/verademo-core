@@ -75,11 +75,11 @@ stages:
         importResults: true
         maximumWaitTime: '360'
 
- - stage: Deployment
-   pool:
-        vmImage: 'windows-latest'
+- stage: Deployment
+  pool:
+     vmImage: 'windows-latest'
 
-   jobs:
+  jobs:
    - job: Release_Deployment
      displayName: Release Deployment
    
