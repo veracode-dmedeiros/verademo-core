@@ -37,7 +37,7 @@ stages:
 
     - task: PublishPipelineArtifact@1
       inputs:
-            targetPath: D:\a\1\a\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
+            targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
             artifactName: WebApp
 
     
@@ -57,11 +57,18 @@ stages:
   - job: Security_Testing
     displayName: SAST
     
+
+
     steps:
     - bash: echo 'SAST'
     - bash: echo $(system.teamProject)
     - bash: echo $(build.buildNumber)
     - bash: echo $(build.artifactstagingdirectory)
+    
+    - task: DownloadPipelineArtifact@2
+      inputs:
+         artifact: WebApp
+
     - task: Veracode@3
       inputs:
         ConnectionDetailsSelection: 'Credentials'
@@ -69,7 +76,7 @@ stages:
         apiKey: '$(VERACODE_KEY)'
         veracodeAppProfile: '$(system.teamProject)'
         version: '$(build.buildNumber)'
-        filepath: '$(build.artifactstagingdirectory)'
+        filepath: '$(Pipeline.Workspace)'  #$(build.artifactstagingdirectory)
         sandboxName: 'Development Sandbox'
         failBuildIfUploadAndScanBuildStepFails: true
         importResults: true
