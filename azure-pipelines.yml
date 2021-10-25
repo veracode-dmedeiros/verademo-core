@@ -56,15 +56,8 @@ stages:
            
   - job: Security_Testing
     displayName: SAST
-    
-
 
     steps:
-    - bash: echo 'SAST'
-    - bash: echo $(system.teamProject)
-    - bash: echo $(build.buildNumber)
-    - bash: echo $(build.artifactstagingdirectory)
-    
     - task: DownloadPipelineArtifact@2
       inputs:
          artifact: WebApp
