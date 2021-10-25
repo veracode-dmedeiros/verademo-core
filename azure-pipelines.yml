@@ -76,7 +76,9 @@ stages:
         maximumWaitTime: '360'
 
  - stage: Deployment
-    
+   pool:
+        vmImage: 'windows-latest'
+
    jobs:
    - job: Release_Deployment
      displayName: Release Deployment
