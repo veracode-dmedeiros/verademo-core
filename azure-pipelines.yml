@@ -64,15 +64,17 @@ stages:
 
     - task: Veracode@3
       inputs:
-        ConnectionDetailsSelection: 'Credentials'
-        apiId: '$(VERACODE_ID)'
-        apiKey: '$(VERACODE_KEY)'
+        ConnectionDetailsSelection: 'Endpoint'
+        AnalysisService: 'Veracode SaaS Connection'
+        # apiId: '$(VERACODE_ID)'
+        # apiKey: '$(VERACODE_KEY)'
         veracodeAppProfile: '$(system.teamProject)'
         version: '$(build.buildNumber)'
         filepath: '$(Pipeline.Workspace)'  #$(build.artifactstagingdirectory)
         sandboxName: 'Development Sandbox'
         failBuildIfUploadAndScanBuildStepFails: true
         importResults: true
+        # failBuildOnPolicyFail: true
         maximumWaitTime: '360'
 
 # Deployment Stage of CI/CD Pipeline
