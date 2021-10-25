@@ -11,10 +11,11 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+pool:
+  vmImage: 'windows-latest'
+
 stages: 
 - stage: Build
-  pool:
-        vmImage: 'windows-latest'
         
   jobs:
   - job: Release_Build
@@ -42,8 +43,7 @@ stages:
     
 # Testing Stage of CI/CD Pipeline
 - stage: Testing
-  pool:
-        vmImage: 'windows-latest'
+
   jobs: 
   - job: Unit_Testing
     displayName: Unit Testing
@@ -75,9 +75,8 @@ stages:
         importResults: true
         maximumWaitTime: '360'
 
+# Deployment Stage of CI/CD Pipeline
 - stage: Deployment
-  pool:
-     vmImage: 'windows-latest'
 
   jobs:
    - job: Release_Deployment
