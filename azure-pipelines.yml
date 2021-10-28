@@ -76,9 +76,11 @@ stages:
        inputs:
             platform: '$(buildPlatform)'
             configuration: '$(buildConfiguration)'
-           
-  - job: Security_Testing
-    displayName: SAST
+
+- stage: Security_Testing
+  jobs:       
+  - job: SAST_Security_Testing
+    displayName: Static Analysis Security Testing
 
     steps:
     - task: DownloadPipelineArtifact@2
@@ -100,6 +102,13 @@ stages:
         # failBuildOnPolicyFail: true
         maximumWaitTime: '360'
 
+  - job: SCA_Security_Testing
+    displayName: Software Componsition Analysis Testing
+  
+    steps:
+    - bash: echo 'SCA Testing'
+    - bash: echo 'Downloading Project'
+    
 # Deployment Stage of CI/CD Pipeline
 - stage: Deployment
 
