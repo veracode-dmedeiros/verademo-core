@@ -19,27 +19,27 @@ stages:
 - stage: Build
         
   jobs:
-  #- job: Release_Build
-  #  displayName: Release Build
+  - job: Release_Build
+    displayName: Release Build
   
-  #  steps:
-  #  - task: NuGetToolInstaller@1
+    steps:
+    - task: NuGetToolInstaller@1
   
-  #  - task: NuGetCommand@2
-  #    inputs:
-  #        restoreSolution: '$(solution)'
+    - task: NuGetCommand@2
+      inputs:
+          restoreSolution: '$(solution)'
 
-  #  - task: VSBuild@1
-  #    inputs:
-  #         solution: '$(solution)'
-  #         msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-  #         platform: '$(buildPlatform)'
-  #         configuration: '$(buildConfiguration)'
+    - task: VSBuild@1
+      inputs:
+           solution: '$(solution)'
+           msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+           platform: '$(buildPlatform)'
+           configuration: '$(buildConfiguration)'
 
-  #  - task: PublishPipelineArtifact@1
-  #    inputs:
-  #          targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
-  #          artifactName: Release_WebApp
+    - task: PublishPipelineArtifact@1
+      inputs:
+            targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
+            artifactName: Release_WebApp
 
   - job: Debug_Build
     displayName: Debug Build
