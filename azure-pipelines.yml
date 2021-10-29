@@ -12,7 +12,7 @@ schedules:
   branches:
     include: [ master ] # which branches the schedule applies to
     #exclude: [ string ] # which branches to exclude from the schedule
-  always: always # whether to always run the pipeline or only if there have been source code changes since the last successful scheduled run. The default is false.schedules:
+  always: true # whether to always run the pipeline or only if there have been source code changes since the last successful scheduled run. The default is false.schedules:
 
 variables:
   solution: '**/*.sln'
