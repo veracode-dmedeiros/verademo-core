@@ -5,7 +5,7 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-# Scheduled Hourly Builds of master branch
+# Scheduled Daily Builds of master branch
 schedules:
 - cron: 0 18 * * * # cron syntax defining a schedule
   displayName: Daily Build # friendly name given to a specific schedule
@@ -21,7 +21,6 @@ variables:
   buildDebugConfiguration: 'Debug'
 
 trigger: none
-# - master
 
 pool:
   vmImage: 'windows-latest'
