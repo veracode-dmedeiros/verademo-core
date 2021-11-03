@@ -6,13 +6,13 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 # Scheduled Hourly Builds of master branch
-#schedules:
-#- cron: 0 18 * * * # cron syntax defining a schedule
-#  displayName: Daily Build # friendly name given to a specific schedule
-#  branches:
-#    include: [ master ] # which branches the schedule applies to
+schedules:
+- cron: 0 18 * * * # cron syntax defining a schedule
+  displayName: Daily Build # friendly name given to a specific schedule
+  branches:
+    include: [ master ] # which branches the schedule applies to
     #exclude: [ string ] # which branches to exclude from the schedule
-#  always: true # whether to always run the pipeline or only if there have been source code changes since the last successful scheduled run. The default is false.schedules:
+  always: true # whether to always run the pipeline or only if there have been source code changes since the last successful scheduled run. The default is false.schedules:
 
 variables:
   solution: '**/*.sln'
@@ -20,8 +20,8 @@ variables:
   buildConfiguration: 'Release'
   buildDebugConfiguration: 'Debug'
 
-trigger: #none
- - master
+trigger: none
+# - master
 
 pool:
   vmImage: 'windows-latest'
