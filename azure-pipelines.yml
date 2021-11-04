@@ -29,8 +29,8 @@ stages:
 - stage: Build
         
   jobs:
-  - job: Release_Build
-    displayName: Release Build
+  - job: Build_Release
+    displayName: Build Release
   
     steps:
     - task: NuGetToolInstaller@1
@@ -49,10 +49,10 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
             targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
-            artifactName: Release_WebApp
+            artifactName: WebApp_Release
 
-  - job: Debug_Build
-    displayName: Debug Build
+  - job: Build_Debug
+    displayName: Build Debug
   
     steps:
     - task: NuGetToolInstaller@1
@@ -71,7 +71,7 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
             targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
-            artifactName: Debug_WebApp
+            artifactName: WebApp_Debug
 
     
 # Testing Stage of CI/CD Pipeline
@@ -101,7 +101,7 @@ stages:
     steps:
     - task: DownloadPipelineArtifact@2
       inputs:
-         artifact: Debug_WebApp
+         artifact: WebApp_Debug
 
     - task: Veracode@3
       inputs:
