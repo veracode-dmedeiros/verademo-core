@@ -30,7 +30,7 @@ stages:
         
   jobs:
   - job: Build_Release
-    displayName: Build Release
+    displayName: Release Build
   
     steps:
     - task: NuGetToolInstaller@1
@@ -52,7 +52,7 @@ stages:
             artifactName: WebApp_Release
 
   - job: Build_Debug
-    displayName: Build Debug
+    displayName: Debug Build
   
     steps:
     - task: NuGetToolInstaller@1
@@ -102,21 +102,23 @@ stages:
     - task: DownloadPipelineArtifact@2
       inputs:
          artifact: WebApp_Debug
-
-    - task: Veracode@3
-      inputs:
-        ConnectionDetailsSelection: 'Endpoint'
-        AnalysisService: 'Veracode SaaS Connection'
+    - bash: ls -la
+    - bash: echo 'SAST Testing'
+   
+    #- task: Veracode@3
+    #  inputs:
+    #    ConnectionDetailsSelection: 'Endpoint'
+    #    AnalysisService: 'Veracode SaaS Connection'
         # apiId: '$(VERACODE_ID)'
         # apiKey: '$(VERACODE_KEY)'
-        veracodeAppProfile: '$(system.teamProject)'
-        version: '$(build.buildNumber)'
-        filepath: '$(Pipeline.Workspace)'  #$(build.artifactstagingdirectory)
-        sandboxName: 'Development Sandbox'
-        failBuildIfUploadAndScanBuildStepFails: true
-        importResults: true
+    #    veracodeAppProfile: '$(system.teamProject)'
+    #    version: '$(build.buildNumber)'
+    #    filepath: '$(Pipeline.Workspace)'  #$(build.artifactstagingdirectory)
+    #    sandboxName: 'Development Sandbox'
+    #    failBuildIfUploadAndScanBuildStepFails: true
+    #    importResults: true
         # failBuildOnPolicyFail: true
-        maximumWaitTime: '360'
+    #    maximumWaitTime: '360'
 
   - job: SCA_Security_Testing
     displayName: Software Componsition Analysis Testing
