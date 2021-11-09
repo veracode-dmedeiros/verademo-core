@@ -21,6 +21,7 @@ variables:
   buildDebugConfiguration: 'Debug'
 
 trigger: none
+pr: none
 
 pool:
   vmImage: 'windows-latest'
