@@ -18,7 +18,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-  jobs:
+jobs:
   - job: Build_Release
     displayName: Release Build
     
