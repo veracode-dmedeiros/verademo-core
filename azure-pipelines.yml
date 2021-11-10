@@ -129,11 +129,11 @@ stages:
     - bash: echo 'Downloading Project'
     
 # Deployment Stage of CI/CD Pipeline
-- stage: Deployment
+# - stage: Deployment
 
-  jobs:
-   - job: Release_Deployment
-     displayName: Release Deployment
+#  jobs:
+#   - job: Release_Deployment
+#     displayName: Release Deployment
    
-     steps:
-     - bash: echo 'Release Deployed'
+#     steps:
+#     - bash: echo 'Release Deployed'
