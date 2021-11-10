@@ -4,10 +4,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger: none
-pr:
-  branches:
-     exclude:
-       - master
+#pr:
+#  branches:
+#     exclude:
+#       - master
 
 pool:
   vmImage: 'windows-latest'
