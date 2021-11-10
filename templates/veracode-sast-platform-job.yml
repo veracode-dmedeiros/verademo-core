@@ -1,24 +1,20 @@
-# File: simple-param.yml
-parameters:
-- name: yesNo # name of the parameter; required
-  type: boolean # data type of the parameter; required
-  default: false
+# File: veracode-sast-platform-job.yml
 
-steps:
-- script: echo ${{ parameters.yesNo }}
+jobs:       
+ - job: SAST_Security_Testing
+   displayName: Static Analysis Security Testing
+
+   steps:
+   - task: DownloadPipelineArtifact@2
+     inputs:
+        artifact: Debug_WebApp
+
+   - bash: echo 'Veracode Platform SAST'
+   - bash: ls -la
 
 
- #jobs:       
- # - job: SAST_Security_Testing
- #   displayName: Static Analysis Security Testing
-
- #   steps:
- #   - task: DownloadPipelineArtifact@2
- #     inputs:
- #        artifact: Debug_WebApp
-
- #   - task: Veracode@3
- #     inputs:
+ ##  - task: Veracode@3
+ #    inputs:
  #       ConnectionDetailsSelection: 'Endpoint'
  #       AnalysisService: 'Veracode SaaS Connection'
  #       # apiId: '$(VERACODE_ID)'

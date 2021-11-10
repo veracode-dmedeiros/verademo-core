@@ -96,16 +96,8 @@ stages:
 
 - stage: Security_Testing
   jobs:       
-  - job: SAST_Security_Testing
-    displayName: Static Analysis Security Testing
+  - template: templates/veracode-sast-platform-job.yml
 
-    steps:
-    - task: DownloadPipelineArtifact@2
-      inputs:
-         artifact: WebApp_Debug
-    - bash: ls -la
-    - bash: echo 'SAST Testing'
-   
     #- task: Veracode@3
     #  inputs:
     #    ConnectionDetailsSelection: 'Endpoint'
