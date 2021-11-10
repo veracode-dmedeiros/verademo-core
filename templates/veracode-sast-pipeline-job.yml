@@ -1,0 +1,13 @@
+# File: veracode-sast-pipeline-job.yml
+
+jobs:       
+ - job: SAST_Security_Testing
+   displayName: Static Analysis Security Testing
+
+   steps:
+   - task: DownloadPipelineArtifact@2
+     inputs:
+        artifact: Debug_WebApp
+
+   - bash: echo 'Veracode Pipeline SAST'
+   - bash: ls -la
