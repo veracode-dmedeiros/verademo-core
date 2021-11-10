@@ -4,10 +4,14 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger: none
-#pr:
-#  branches:
-#     exclude:
-#       - master
+pr:
+  branches:
+    include: *
+  paths:
+    exlude: 
+     - *.yml
+     - templates/*
+     - .github/*
 
 pool:
   vmImage: 'windows-latest'
