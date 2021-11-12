@@ -7,18 +7,18 @@
 
 # Scheduled Daily Builds of master branch
 schedules:
-- cron: 0 16 * * * # cron syntax defining a schedule
+- cron: 0 12 * * * # cron syntax defining a schedule
   displayName: Daily Build # friendly name given to a specific schedule
   branches:
     include: [ master ] # which branches the schedule applies to
     #exclude: [ string ] # which branches to exclude from the schedule
   always: true # whether to always run the pipeline or only if there have been source code changes since the last successful scheduled run. The default is false.schedules:
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  buildDebugConfiguration: 'Debug'
+#variables:
+#  solution: '**/*.sln'
+#  buildPlatform: 'Any CPU'
+#  buildConfiguration: 'Release'
+#  buildDebugConfiguration: 'Debug'
 
 trigger: none
 pr: none
@@ -34,18 +34,7 @@ stages:
     displayName: Release Build
   
     steps:
-    - task: NuGetToolInstaller@1
-  
-    - task: NuGetCommand@2
-      inputs:
-          restoreSolution: '$(solution)'
-
-    - task: VSBuild@1
-      inputs:
-           solution: '$(solution)'
-           msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-           platform: '$(buildPlatform)'
-           configuration: '$(buildConfiguration)'
+    - template: templates/stesp/release-build-steps.yml
 
     - task: PublishPipelineArtifact@1
       inputs:
@@ -56,18 +45,7 @@ stages:
     displayName: Debug Build
   
     steps:
-    - task: NuGetToolInstaller@1
-  
-    - task: NuGetCommand@2
-      inputs:
-          restoreSolution: '$(solution)'
-
-    - task: VSBuild@1
-      inputs:
-           solution: '$(solution)'
-           msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-           platform: '$(buildPlatform)'
-           configuration: '$(buildDebugConfiguration)'
+    - template: templates/steps/debug-build-steps.yml
 
     - task: PublishPipelineArtifact@1
       inputs:
@@ -96,22 +74,7 @@ stages:
 
 - stage: Security_Testing
   jobs:       
-  - template: templates/veracode-sast-platform-job.yml
-
-    #- task: Veracode@3
-    #  inputs:
-    #    ConnectionDetailsSelection: 'Endpoint'
-    #    AnalysisService: 'Veracode SaaS Connection'
-        # apiId: '$(VERACODE_ID)'
-        # apiKey: '$(VERACODE_KEY)'
-    #    veracodeAppProfile: '$(system.teamProject)'
-    #    version: '$(build.buildNumber)'
-    #    filepath: '$(Pipeline.Workspace)'  #$(build.artifactstagingdirectory)
-    #    sandboxName: 'Development Sandbox'
-    #    failBuildIfUploadAndScanBuildStepFails: true
-    #    importResults: true
-        # failBuildOnPolicyFail: true
-    #    maximumWaitTime: '360'
+  - template: templates/jobs/veracode-sast-platform-job.yml
 
   - job: SCA_Security_Testing
     displayName: Software Componsition Analysis Testing
