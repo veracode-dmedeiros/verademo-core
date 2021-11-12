@@ -41,4 +41,4 @@ jobs:
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
  
-  - template: templates/veracode-sast-pipeline-job.yml
+  - template: templates/jobs/veracode-sast-pipeline-job.yml
