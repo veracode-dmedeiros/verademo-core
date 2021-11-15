@@ -1,20 +1,20 @@
 # File: debug-build-steps.yml 
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Debug'
+#variables:
+#  solution: '**/*.sln'
+#  buildPlatform: 'Any CPU'
+#  buildConfiguration: 'Debug'
 
 steps:
     - task: NuGetToolInstaller@1
   
     - task: NuGetCommand@2
       inputs:
-          restoreSolution: '$(solution)'
+          restoreSolution: '**/*.sln' #'$(solution)'
 
     - task: VSBuild@1
       inputs:
-           solution: '$(solution)'
+           solution: '**/*.sln' #'$(solution)'
            msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-           platform: '$(buildPlatform)'
-           configuration: '$(buildConfiguration)'
+           platform: 'Any CPU' #'$(buildPlatform)'
+           configuration: 'Debug' #'$(buildConfiguration)'
