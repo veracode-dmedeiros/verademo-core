@@ -7,7 +7,7 @@
 
 # Scheduled Daily Builds of master branch
 schedules:
-- cron: 0 0 * * * # cron syntax defining a schedule
+- cron: 0 15 * * * # cron syntax defining a schedule
   displayName: Daily Build # friendly name given to a specific schedule
   branches:
     include: [ master ] # which branches the schedule applies to
