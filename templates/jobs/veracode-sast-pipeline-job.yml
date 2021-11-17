@@ -5,6 +5,8 @@ jobs:
    displayName: Static Analysis Security Testing
 
    steps:
+   - templates/steps/veracode-sast-pipeline-steps.yml
+
    #- task: DownloadPipelineArtifact@2
    #  inputs:
    #     artifact: Debug_WebApp
