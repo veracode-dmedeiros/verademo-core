@@ -6,20 +6,18 @@ steps:
     curl -O -L https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
     displayName: "Download Pipeline Scan"
 
-- task: ExtractFiles@1
-  inputs:
-    archiveFilePatterns: "pipeline-scan-LATEST.zip"
-    destinationFolder: "pipeline"
-    cleanDestinationFolder: false
+- bash: curl -sSO https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
+   displayName: Download Pipeline Scan
 
-- script: |
-      java -jar pipeline\pipeline-scan.jar --version
+- bash: java -jar pipeline\pipeline-scan.jar --version
+  displayName: "Run Pipeline Scan" 
+      
 
-      # --veracode_api_id "$(VERACODE_API_ID)" --veracode_api_key "$(VERACODE_API_KEY)" --file "example.jar" --baseline_file "../baseline.json"
-      # VERACODE_API_ID and VERACODE_API_KEY must reference your API credentials.
-      # "--baseline_file" specifies the baseline of known flaws for the specified application file.
-      # This example command breaks the build for new flaws not listed in the specified baseline file. 
-    #env:
+  # --veracode_api_id "$(VERACODE_API_ID)" --veracode_api_key "$(VERACODE_API_KEY)" --file "example.jar" --baseline_file "../baseline.json"
+  # VERACODE_API_ID and VERACODE_API_KEY must reference your API credentials.
+  # "--baseline_file" specifies the baseline of known flaws for the specified application file.
+  # This example command breaks the build for new flaws not listed in the specified baseline file. 
+  #env:
     #  VERACODE_API_ID: $(VERACODE_API_ID)
     #  VERACODE_API_KEY: $(VERACODE_API_KEY)
-    #displayName: "Run Pipeline Scan"
+    #
