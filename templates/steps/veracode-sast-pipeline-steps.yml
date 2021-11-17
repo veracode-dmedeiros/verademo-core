@@ -2,11 +2,10 @@
 # File: veracode-sast-pipeline-steps.yml
 
 steps:
-- script: | 
-    curl -O -L https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
+- bash: curl -sSO https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
     displayName: "Download Pipeline Scan"
 
-- bash: curl -sSO https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
+- bash: unzip -o pipeline-scan-LATEST.zip
   displayName: Download Pipeline Scan
 
 - bash: java -jar pipeline\pipeline-scan.jar --version
