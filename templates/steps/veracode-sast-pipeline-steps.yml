@@ -7,7 +7,7 @@ steps:
     displayName: "Download Pipeline Scan"
 
 - bash: curl -sSO https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
-   displayName: Download Pipeline Scan
+  displayName: Download Pipeline Scan
 
 - bash: java -jar pipeline\pipeline-scan.jar --version
   displayName: "Run Pipeline Scan" 
