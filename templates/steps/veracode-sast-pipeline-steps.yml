@@ -3,7 +3,7 @@
 
 steps:
 - bash: curl -sSO https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
-    displayName: "Download Pipeline Scan"
+  displayName: "Download Pipeline Scan"
 
 - bash: unzip -o pipeline-scan-LATEST.zip
   displayName: Download Pipeline Scan
