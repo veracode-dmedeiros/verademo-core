@@ -24,25 +24,26 @@ stages:
   jobs:
   - job: Build_Release
     displayName: Release Build
-    
+  
     steps:
-    - task: NuGetToolInstaller@1
+    - template: templates/steps/release-build-steps.yml
+    - script: pwd
+    - script: ls -la
+    #- task: PublishPipelineArtifact@1
+    #  inputs:
+    #        targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
+    #        artifactName: WebApp_Release
 
-    - task: NuGetCommand@2
-      inputs:
-         restoreSolution: '$(solution)'
+  - job: Build_Debug
+    displayName: Debug Build
+  
+    steps:
+    - template: templates/steps/debug-build-steps.yml
 
-    - task: VSBuild@1
-      inputs:
-        solution: '$(solution)'
-        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
-
-    - task: VSTest@2
-      inputs:
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
+    #- task: PublishPipelineArtifact@1
+    #  inputs:
+    #        targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
+    #        artifactName: WebApp_Debug
         
 - stage: Testing
   jobs:
@@ -52,4 +53,9 @@ stages:
 
 - stage: Security_Testing
   jobs:
+  - job:
+    steps:
+    - script: pwd
+    - script: ls -la
+
   - template: templates/jobs/veracode-sast-pipeline-job.yml
