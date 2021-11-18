@@ -18,7 +18,10 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-jobs:
+stages:
+- stage: Build
+
+  jobs:
   - job: Build_Release
     displayName: Release Build
     
@@ -40,5 +43,12 @@ jobs:
       inputs:
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
- 
+        
+- stage: Testing
+  jobs:
+  - job: 
+    steps:
+    - script: echo Testing
+
+- stage: Security_Testing
   - template: templates/jobs/veracode-sast-pipeline-job.yml
