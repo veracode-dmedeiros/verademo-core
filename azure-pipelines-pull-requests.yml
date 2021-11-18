@@ -52,6 +52,13 @@ stages:
   - job: 
     steps:
     - script: echo Testing
+    - script: pwd
+    - script: ls -la
+
+    - task: VSTest@2
+      inputs:
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
 
 - stage: Security_Testing
   jobs:
