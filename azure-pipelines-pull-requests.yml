@@ -52,18 +52,14 @@ stages:
   - job: 
 
     steps:
-    - script: echo $(System.ArtifactsDirectory)
-    - task: DownloadBuildArtifacts@1
-      inputs:
-        buildType: 'current'
-        downloadType: 'single'
-        artifactName: 'WebApp_Release'
-        downloadPath: '$(System.ArtifactsDirectory)'
+    - script: echo Testing
     - script: pwd
     - script: ls -la
-    - script: ls -la $(System.ArtifactsDirectory)
 
-
+    - task: VSTest@2
+      inputs:
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
 
 - stage: Security_Testing
   jobs:
