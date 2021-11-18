@@ -2,16 +2,16 @@
 # File: veracode-sast-pipeline-steps.yml
 
 steps:
-- bash: curl -sSO https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
+- script: curl -sSO https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
   displayName: "Download Pipeline Scan"
 
-- bash: unzip -o pipeline-scan-LATEST.zip
+- script: unzip -o pipeline-scan-LATEST.zip
   displayName: Download Pipeline Scan
 
-- bash: java -jar pipeline\pipeline-scan.jar --version
+- script: java -jar pipeline-scan.jar --version
   displayName: "Run Pipeline Scan" 
-      
-
+     
+- script: ls -la
   # --veracode_api_id "$(VERACODE_API_ID)" --veracode_api_key "$(VERACODE_API_KEY)" --file "example.jar" --baseline_file "../baseline.json"
   # VERACODE_API_ID and VERACODE_API_KEY must reference your API credentials.
   # "--baseline_file" specifies the baseline of known flaws for the specified application file.
