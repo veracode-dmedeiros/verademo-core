@@ -29,10 +29,12 @@ stages:
     - template: templates/steps/release-build-steps.yml
     - script: pwd
     - script: ls -la
-    #- task: PublishPipelineArtifact@1
-    #  inputs:
-    #        targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
-    #        artifactName: WebApp_Release
+    - script: echo $(Build.StagingDirectory)
+    - script: ls -la $(Build.StagingDirectory)
+    - task: PublishPipelineArtifact@1
+      inputs:
+            targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
+            artifactName: WebApp_Release
 
   - job: Build_Debug
     displayName: Debug Build
