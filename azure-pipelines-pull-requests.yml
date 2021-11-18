@@ -50,8 +50,20 @@ stages:
 - stage: Testing
   jobs:
   - job: 
+
     steps:
-    - script: echo Testing
+    - script: echo $(System.ArtifactsDirectory)
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'WebApp_Release'
+        downloadPath: '$(System.ArtifactsDirectory)'
+    - script: pwd
+    - script: ls -la
+    - script: ls -la $(System.ArtifactsDirectory)
+
+
 
 - stage: Security_Testing
   jobs:
