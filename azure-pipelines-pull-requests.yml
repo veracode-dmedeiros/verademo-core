@@ -65,7 +65,16 @@ stages:
   jobs:
   - job:
     steps:
+    - script: echo $(System.ArtifactsDirectory)
     - script: pwd
-    - script: ls -la
+    - script: ls -la $(System.ArtifactsDirectory)
+
+    - task: DownloadBuildArtifacts@1
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'WebApp_Release'
+        downloadPath: '$(System.ArtifactsDirectory)'
+        checkDownloadedFiles: true
 
   - template: templates/jobs/veracode-sast-pipeline-job.yml
