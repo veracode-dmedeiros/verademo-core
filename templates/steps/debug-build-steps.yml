@@ -15,6 +15,8 @@ steps:
     - task: VSBuild@1
       inputs:
            solution: '**/*.sln' #'$(solution)'
-           msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+           msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:PackageAsSingleFile=false /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip"'
            platform: 'Any CPU' #'$(buildPlatform)'
            configuration: 'Debug' #'$(buildConfiguration)'
+    
+    - bash: ls -la $(build.artifactStagingDirectory)
