@@ -1,10 +1,10 @@
 # File: abstract-build-steps.yml
 
 parameters:
-- name solution
+- name: solution
   type: string
   default: **/*.sln
-- name buildPlatform
+- name: buildPlatform
   type: string
   default: Any CPU
 - name: buildConfiguration
