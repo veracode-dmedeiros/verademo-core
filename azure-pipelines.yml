@@ -46,6 +46,7 @@ stages:
   - job: Build_Debug
     displayName: Debug Build
   
+    steps:
     - template: templates/steps/abstract-build-steps.yml
       parameters:
         buildConfiguration: 'Debug'
