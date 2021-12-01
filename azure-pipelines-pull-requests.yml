@@ -13,11 +13,6 @@ pr:
 pool:
   vmImage: 'windows-latest'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-
 stages:
 - stage: Build
 
@@ -26,11 +21,10 @@ stages:
     displayName: Release Build
   
     steps:
-    - template: templates/steps/release-build-steps.yml
-    - script: pwd
-    - script: ls -la
-    - script: echo $(Build.StagingDirectory)
-    - script: ls -la $(Build.StagingDirectory)
+    - template: templates/steps/abstract-build-steps.yml
+      parameters:
+        buildConfiguration: 'Release'
+
     - task: PublishPipelineArtifact@1
       inputs:
             targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
@@ -40,8 +34,10 @@ stages:
     displayName: Debug Build
   
     steps:
-    - template: templates/steps/debug-build-steps.yml
-
+    - template: templates/steps/abstract-build-steps.yml
+      parameters:
+        buildConfiguration: 'Release'
+        
     #- task: PublishPipelineArtifact@1
     #  inputs:
     #        targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
