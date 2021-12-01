@@ -36,16 +36,17 @@ stages:
     steps:
     - template: templates/steps/abstract-build-steps.yml
       parameters:
-        buildConfiguration: 'Release'
+        buildConfiguration: 'Debug'
         
-    #- task: PublishPipelineArtifact@1
-    #  inputs:
-    #        targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
-    #        artifactName: WebApp_Debug
+    - task: PublishPipelineArtifact@1
+      inputs:
+            targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
+            artifactName: WebApp_Debug
         
 - stage: Testing
   jobs:
-  - job: 
+  - job: Unit_Testing
+    displayName: Unit Testing 
 
     steps:
     - script: echo Testing
