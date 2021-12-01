@@ -45,10 +45,11 @@ stages:
 
   - job: Build_Debug
     displayName: Debug Build
+  
     steps:
-      - template: templates/steps/abstract-build-steps.yml
-        parameters:
-          buildConfiguration: 'Debug'
+    - template: templates/steps/abstract-build-steps.yml
+      parameters:
+        buildConfiguration: 'Debug'
 
       - task: PublishPipelineArtifact@1
         inputs:
