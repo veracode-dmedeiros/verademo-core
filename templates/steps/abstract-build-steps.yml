@@ -3,13 +3,13 @@
 parameters:
 - name: solution
   type: string
-  default: **/*.sln
+  default: '**/*.sln'
 - name: buildPlatform
   type: string
-  default: Any CPU
+  default: 'Any CPU'
 - name: buildConfiguration
   type: string
-  default: Debug
+  default: 'Debug'
 
 steps:
     - task: NuGetToolInstaller@1
