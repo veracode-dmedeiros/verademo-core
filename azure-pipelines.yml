@@ -34,7 +34,9 @@ stages:
     displayName: Release Build
   
     steps:
-    - template: templates/steps/release-build-steps.yml
+    - template: templates/steps/abstract-build-steps.yml
+      parameters:
+        buildConfiguration: 'Release'
 
     - task: PublishPipelineArtifact@1
       inputs:
@@ -44,8 +46,9 @@ stages:
   - job: Build_Debug
     displayName: Debug Build
   
-    steps:
-    - template: templates/steps/debug-build-steps.yml
+    - template: templates/steps/abstract-build-steps.yml
+      parameters:
+        buildConfiguration: 'Debug'
 
     - task: PublishPipelineArtifact@1
       inputs:
