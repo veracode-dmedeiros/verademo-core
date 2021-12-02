@@ -30,14 +30,14 @@ stages:
     displayName: Release Build
   
     steps:
-      - template: templates/steps/abstract-build-steps.yml
-        parameters:
-          buildConfiguration: 'Release'
+    - template: templates/steps/abstract-build-steps.yml
+      parameters:
+         buildConfiguration: 'Release'
 
-      - task: PublishPipelineArtifact@1
-        inputs:
-            targetPath: $(Build.StagingDirectory)\WebApp.zip
-            artifactName: WebApp_Release
+    - task: PublishPipelineArtifact@1
+      inputs:
+         targetPath: $(Build.StagingDirectory)\WebApp.zip
+         artifactName: WebApp_Release
 
   - job: Build_Debug
     displayName: Debug Build
@@ -47,10 +47,10 @@ stages:
       parameters:
         buildConfiguration: 'Debug'
 
-      - task: PublishPipelineArtifact@1
-        inputs:
-            targetPath: $(Build.StagingDirectory)\WebApp.zip 
-            artifactName: WebApp_Debug
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: $(Build.StagingDirectory)\WebApp.zip 
+        artifactName: WebApp_Debug
 
     
 # Testing Stage of CI/CD Pipeline
