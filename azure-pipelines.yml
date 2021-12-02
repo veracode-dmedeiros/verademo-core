@@ -6,22 +6,18 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 # Scheduled Daily Builds of master branch
-schedules:
-- cron: 0 15 * * * # cron syntax defining a schedule
-  displayName: Daily Build # friendly name given to a specific schedule
-  branches:
-    include: [ master ] # which branches the schedule applies to
-    #exclude: [ string ] # which branches to exclude from the schedule
-  always: true # whether to always run the pipeline or only if there have been source code changes since the last successful scheduled run. The default is false.schedules:
+#schedules:
+#- cron: 0 15 * * * # cron syntax defining a schedule
+#  displayName: Daily Build # friendly name given to a specific schedule
+#  branches:
+#    include: [ master ] # which branches the schedule applies to
+#    #exclude: [ string ] # which branches to exclude from the schedule
+#  always: true # whether to always run the pipeline or only if there have been source code changes since the last successful scheduled run. The default is false.schedules:
 
-#variables:
-#  solution: '**/*.sln'
-#  buildPlatform: 'Any CPU'
-#  buildConfiguration: 'Release'
-#  buildDebugConfiguration: 'Debug'
+trigger: 
+  - master
 
-trigger: none
-pr: none
+#pr: none
 
 pool:
   vmImage: 'windows-latest'
@@ -34,14 +30,14 @@ stages:
     displayName: Release Build
   
     steps:
-      - template: templates/steps/abstract-build-steps.yml
-        parameters:
-          buildConfiguration: 'Release'
+    - template: templates/steps/abstract-build-steps.yml
+      parameters:
+         buildConfiguration: 'Release'
 
-      - task: PublishPipelineArtifact@1
-        inputs:
-            targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
-            artifactName: WebApp_Release
+    - task: PublishPipelineArtifact@1
+      inputs:
+         targetPath: $(Build.StagingDirectory)\WebApp.zip
+         artifactName: WebApp_Release
 
   - job: Build_Debug
     displayName: Debug Build
@@ -51,10 +47,10 @@ stages:
       parameters:
         buildConfiguration: 'Debug'
 
-      - task: PublishPipelineArtifact@1
-        inputs:
-            targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
-            artifactName: WebApp_Debug
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: $(Build.StagingDirectory)\WebApp.zip 
+        artifactName: WebApp_Debug
 
     
 # Testing Stage of CI/CD Pipeline
