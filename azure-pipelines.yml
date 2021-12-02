@@ -34,12 +34,12 @@ stages:
     displayName: Release Build
   
     steps:
-    - template: templates/steps/abstract-build-steps.yml
-      parameters:
-        buildConfiguration: 'Release'
+      - template: templates/steps/abstract-build-steps.yml
+        parameters:
+          buildConfiguration: 'Release'
 
-    - task: PublishPipelineArtifact@1
-      inputs:
+      - task: PublishPipelineArtifact@1
+        inputs:
             targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
             artifactName: WebApp_Release
 
@@ -51,8 +51,8 @@ stages:
       parameters:
         buildConfiguration: 'Debug'
 
-    - task: PublishPipelineArtifact@1
-      inputs:
+      - task: PublishPipelineArtifact@1
+        inputs:
             targetPath: $(Build.StagingDirectory)\WebApp.zip  #$(System.DefaultWorkingDirectory)/bin/WebApp
             artifactName: WebApp_Debug
 
