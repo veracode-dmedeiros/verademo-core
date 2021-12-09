@@ -49,4 +49,4 @@ jobs:
 
 - template: jobs/veracode-sast-platform-job.yml@template-scripts
   parameters:
-     ArtifactName: 'drop'
+     solution: 'drop'
