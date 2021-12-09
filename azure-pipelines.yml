@@ -5,6 +5,13 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+resources:
+  repositories:
+    - repository: template-scripts
+      type: github
+      name: dmedeiros-veracode/template-scripts
+
+
 # Scheduled Daily Builds of master branch
 schedules:
 - cron: 0 15 * * * # cron syntax defining a schedule
@@ -72,7 +79,7 @@ stages:
 
 - stage: Security_Testing
   jobs:       
-  - template: templates/jobs/veracode-sast-platform-job.yml
+  - template: jobs/veracode-sast-platform-job.yml@template-scripts
 
   - job: SCA_Security_Testing
     displayName: Software Componsition Analysis Testing
