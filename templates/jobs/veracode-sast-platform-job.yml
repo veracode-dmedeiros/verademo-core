@@ -5,25 +5,21 @@ jobs:
    displayName: Static Analysis Security Testing
 
    steps:
-   #- task: DownloadPipelineArtifact@2
-   #  inputs:
-   #     artifact: Debug_WebApp
+   - task: DownloadPipelineArtifact@2
+     inputs:
+        artifact: WebApp_Debug
 
-   - bash: echo 'Veracode Platform SAST'
-   - bash: ls -la
-
-
-   #- task: Veracode@3
-   #  inputs:
-   #     ConnectionDetailsSelection: 'Endpoint'
-   #     AnalysisService: 'Veracode SaaS Connection'
+   - task: Veracode@3
+     inputs:
+        ConnectionDetailsSelection: 'Endpoint'
+        AnalysisService: 'Veracode SaaS Connection'
         # apiId: '$(VERACODE_ID)'
         # apiKey: '$(VERACODE_KEY)'
-   #     veracodeAppProfile: '$(system.teamProject)'
-   #     version: '$(build.buildNumber)'
-   #     filepath: '$(Pipeline.Workspace)'  #$(build.artifactstagingdirectory)
-   #     sandboxName: 'Development Sandbox'
-   #     failBuildIfUploadAndScanBuildStepFails: true
-   #     importResults: true
-       # failBuildOnPolicyFail: true
+        veracodeAppProfile: '$(system.teamProject)'
+        version: '$(build.buildNumber)'
+        filepath: $(Pipeline.Workspace)\WebApp.zip  
+        sandboxName: 'Development Sandbox'
+        failBuildIfUploadAndScanBuildStepFails: true
+        importResults: true
+        failBuildOnPolicyFail: true
        # maximumWaitTime: '360'
