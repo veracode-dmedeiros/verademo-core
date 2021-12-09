@@ -8,6 +8,7 @@ resources:
       type: github
       name: dmedeiros-veracode/template-scripts
       endpoint: dmedeiros-veracode
+      ref: refs/heads/debug
 
 trigger: none
 
@@ -20,7 +21,7 @@ variables:
   buildConfiguration: 'Release'
 
 jobs: 
-- job: Build
+- job: build
   steps:
   - task: NuGetToolInstaller@1
 
@@ -40,8 +41,4 @@ jobs:
       platform: '$(buildPlatform)'
       configuration: '$(buildConfiguration)'
 
-- job: securityTesting
-  displayName: Securit Testing
-  
-  steps:
-    - template: jobs/veracode-sast-platform-job.yml@template-scripts
+  - template: jobs/veracode-sast-platform-job.yml@template-scripts
