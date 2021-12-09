@@ -10,6 +10,7 @@ resources:
     - repository: template-scripts
       type: github
       name: dmedeiros-veracode/template-scripts
+      endpoint: dmedeiros-veracode
 
 
 # Scheduled Daily Builds of master branch
