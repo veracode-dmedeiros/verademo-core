@@ -80,7 +80,29 @@ stages:
 
 - stage: Security_Testing
   jobs:       
-  - template: jobs/veracode-sast-platform-job.yml@template-scripts
+  #- template: jobs/veracode-sast-platform-job.yml@template-scripts
+      
+  - job: SAST_Security_Testing
+    displayName: Static Analysis Security Testing
+
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        artifact: WebApp_Debug
+
+    - task: Veracode@3
+      inputs:
+        ConnectionDetailsSelection: 'Endpoint'
+        AnalysisService: 'Veracode SaaS Connection'
+        veracodeAppProfile: '$(system.teamProject)'
+        version: '$(build.buildNumber)'
+        filepath: $(Pipeline.Workspace)\WebApp.zip  
+        sandboxName: 'Development Sandbox'
+        failBuildIfUploadAndScanBuildStepFails: true
+        importResults: true
+        failBuildOnPolicyFail: true
+       # maximumWaitTime: '360'
+
 
   - job: SCA_Security_Testing
     displayName: Software Componsition Analysis Testing
