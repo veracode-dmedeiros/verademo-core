@@ -82,7 +82,7 @@ stages:
   jobs:       
   - template: jobs/veracode-sast-platform-job.yml@template-scripts
     parameters: 
-      downloadArtifact: "Web_Debug"
+      downloadArtifact: "WebApp_Debug"
       
   - job: SCA_Security_Testing
     displayName: Software Componsition Analysis Testing
