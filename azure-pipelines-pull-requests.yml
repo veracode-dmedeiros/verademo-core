@@ -3,6 +3,13 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+resources:
+  repositories:
+    - repository: template-scripts
+      type: github
+      name: dmedeiros-veracode/template-scripts
+      endpoint: dmedeiros-veracode
+
 trigger: none
 pr:
   paths:
@@ -21,7 +28,7 @@ stages:
     displayName: Release Build
   
     steps:
-    - template: templates/steps/abstract-build-steps.yml
+    - template: steps/abstract-build-steps.yml@template-scripts
       parameters:
         buildConfiguration: 'Release'
 
@@ -34,7 +41,7 @@ stages:
     displayName: Debug Build
   
     steps:
-    - template: templates/steps/abstract-build-steps.yml
+    - template: steps/abstract-build-steps.yml@template-scripts
       parameters:
         buildConfiguration: 'Debug'
         
@@ -60,18 +67,6 @@ stages:
 
 - stage: Security_Testing
   jobs:
-  - job:
-    steps:
-    - script: echo $(System.ArtifactsDirectory)
-    - script: pwd
-    - script: ls -la $(System.ArtifactsDirectory)
-
-    - task: DownloadBuildArtifacts@1
-      inputs:
-        buildType: 'current'
-        downloadType: 'single'
-        artifactName: 'WebApp_Release'
-        downloadPath: '$(System.ArtifactsDirectory)'
-        checkDownloadedFiles: true
-    - script: ls -la $(System.ArtifactsDirectory)
-  # - template: templates/jobs/veracode-sast-pipeline-job.yml
+  - template: jobs/veracode-sast-pipeline-job.yml@template-scripts
+    parameters:
+        downloadArtifact: "WebApp_Debug"
