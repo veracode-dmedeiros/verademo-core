@@ -74,4 +74,8 @@ stages:
         downloadPath: '$(System.ArtifactsDirectory)'
         checkDownloadedFiles: true
     - script: ls -la $(System.ArtifactsDirectory)
-  # - template: templates/jobs/veracode-sast-pipeline-job.yml
+  
+  - template: templates/jobs/veracode-sast-pipeline-job.yml
+    parameters: 
+       downloadArtifact: "WebApp_Debug"
+      
