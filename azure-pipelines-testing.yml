@@ -12,7 +12,7 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-  
-- task: veracode-sast-pipeline-prototype@0
+
+- task: veracode-sast-platform-analysis-sandbox-dev@0
   inputs:
-    samplestring: 'I''m only human'
+    samplestring: 'asfdasdf'
