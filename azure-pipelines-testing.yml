@@ -12,19 +12,3 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-
-- task: veracode-sast-pipeline-analysis-dev@0
-  inputs:
-    samplestring: 'my pipeline'
-
-- task: veracode-sast-platform-analysis-dev@0
-  inputs:
-    samplestring: 'platform'
-
-- task: veracode-sast-platform-analysis-sandbox-dev@0
-  inputs:
-    samplestring: 'asfdasdf'
-
-- task: veracode-sast-platform-analysis-promoting-dev@0
-  inputs:
-    samplestring: 'promote'
