@@ -17,21 +17,15 @@ steps:
   inputs:
     ConnectionType: 'Service'
     veracodeAPIService: 'asdfsadfasdf'
-  
+    samplestring: 'dfasdfasdfasdf'
 - task: VeracodeSastPipelineAnalysis-dev@0
   inputs:
     ConnectionType: 'Service'
     veracodeAPIService: 'asdfsadfasdf'
-
-- task: VeracodeSastPlatformAnalysis-Dev@0
-  inputs:
-    PlatformProfileName: "test"
-    ConnectionType: 'Credentials'
-    apiId: 'asdfasdfasdf'
-    apiKey: 'asdfasdfasdf'
-  
+    samplestring: 'sdfasdfasdf'
+    
 - task: VeracodeSastPlatformAnalysisSandbox-dev@0
   inputs:
-    ConnectionType: 'Credentials'
-    apiId: 'asdfasdfasdfasdf'
-    apiKey: 'sadfsdfasdfasdf'
+    ConnectionType: 'Service'
+    veracodeAPIService: 'asdfsadfasdf'
+    samplestring: 'asdfasdfasdf'
