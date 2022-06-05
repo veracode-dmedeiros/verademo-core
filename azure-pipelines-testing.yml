@@ -16,4 +16,5 @@ steps:
 # Starter pipeline
 - task: VeracodeBuidAndReleaseTask-dev@0
   inputs:
-    samplestring: 'MyBuildAndTask'
+        FabrikamService: 'FabrikamTest'
+        project: Test me
