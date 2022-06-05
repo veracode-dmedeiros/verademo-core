@@ -1,4 +1,4 @@
-# Starter pipeline
+
 
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
@@ -13,19 +13,7 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- task: VeracodeSastPlatformAnalysisPromoting-dev@0
+# Starter pipeline
+- task: VeracodeBuidAndReleaseTask-dev@0
   inputs:
-    ConnectionType: 'Service'
-    veracodeAPIService: 'asdfsadfasdf'
-    samplestring: 'dfasdfasdfasdf'
-- task: VeracodeSastPipelineAnalysis-dev@0
-  inputs:
-    ConnectionType: 'Service'
-    veracodeAPIService: 'asdfsadfasdf'
-    samplestring: 'sdfasdfasdf'
-    
-- task: VeracodeSastPlatformAnalysisSandbox-dev@0
-  inputs:
-    ConnectionType: 'Service'
-    veracodeAPIService: 'asdfsadfasdf'
-    samplestring: 'asdfasdfasdf'
+    samplestring: 'MyBuildAndTask'
