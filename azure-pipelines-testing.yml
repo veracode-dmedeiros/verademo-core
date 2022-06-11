@@ -14,7 +14,6 @@ steps:
   displayName: 'Run a one-line script'
 
 # Starter pipeline
-- task: VeracodeBuidAndReleaseTask-dev@0
+- task: Sample-Task-dev@0
   inputs:
-        FabrikamService: 'FabrikamTest'
-        project: Test me
+    samplestring: 'Test VE'
